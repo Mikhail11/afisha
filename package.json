@@ -2,7 +2,7 @@
   "name": "afisha",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mikhail11.github.io/afisha",
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.23.4",
     "react": "^16.10.0",
@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
