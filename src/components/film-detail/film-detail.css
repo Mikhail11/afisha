@@ -1,0 +1,23 @@
+.film-deatail {
+    margin-top: 20px;
+}
+.film-deatail__container {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.film-deatail__props-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.film-deatail__props-key {
+    color: #faad14;
+    margin-right: 10px;
+}
+
+.film-deatail__props-overview {
+    margin-top: 10px;
+}

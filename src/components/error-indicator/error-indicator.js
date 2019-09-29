@@ -5,9 +5,9 @@ import icon from './film_end.png';
 const ErrorIndicator = () => {
     return (
       <div className="error-indicator">
-          <img src={icon} alt="error icon" />
+          <img width={200} src={icon} alt="error icon" />
           <span className="thats-all">ВСЁ!</span>
-          <span>кина не будет</span>
+          <span className="thats-all__descr">кина не будет, расходимся</span>
       </div>
     );
 };

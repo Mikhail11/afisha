@@ -1,7 +1,9 @@
 import React from 'react';
 import FilmList from '../film-list';
+import FilmDetail from '../film-detail';
 import ErrorBoundry from '../error-boundry';
 import {Layout} from 'antd';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './app.css'
 
@@ -16,7 +18,13 @@ const App = () => {
             </Header>
             <Content className="content">
                 <ErrorBoundry>
-                    <FilmList />
+                <Router>
+                    <Route path="/" exact component={FilmList} />
+                    <Route path="/movie/:id" render={({match})=> {
+                        const {id} = match.params;
+                        return <FilmDetail id={id} />
+                    }} />
+                </Router>
                 </ErrorBoundry>
             </Content>
             <Footer />

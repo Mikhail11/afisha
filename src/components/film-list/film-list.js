@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import FilmRow from '../film-row';
 import MovieServices from '../../services/movie-services';
 import {List, Spin} from 'antd';
+import {withRouter} from 'react-router-dom';
+import './film-list.css';
 
 
-export default class FilmList extends Component {
+class FilmList extends Component {
     state = {
         items: null,
         loading: true
@@ -22,10 +24,14 @@ export default class FilmList extends Component {
             });
     }
 
+    onRowSelect = (id) => {
+        this.props.history.push(`movie/${id}`);
+    };
+
     render() {
         if(this.state.loading) {
             return (
-                <div>
+                <div className="spin-container">
                     <Spin size="large" />
                 </div>
             );
@@ -36,14 +42,11 @@ export default class FilmList extends Component {
                         itemLayout="vertical"
                         size="large"
                         pagination={{
-                            onChange: page => {
-                                console.log(page);
-                            },
-                            pageSize: 6,
+                            pageSize: 4,
                         }}
                         dataSource={this.state.items}
                         renderItem={item => (
-                            <FilmRow item={item} />
+                            <FilmRow item={item}  onRowSelected={this.onRowSelect}/>
                         )}
                     />
                 </div>
@@ -52,3 +55,5 @@ export default class FilmList extends Component {
         }
     }
 }
+
+export default withRouter(FilmList);

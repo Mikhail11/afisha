@@ -16,8 +16,14 @@ export default class MovieService {
     };
 
     getImage = (image, width = '92') => {
-        const widthPath = `w${width}/`;
+        const widthPath = `w${width}`;
         return `${this._imageBase}${widthPath}${image}`;
+    };
+
+    getFilm = async(id) => {
+        const url = `${id}?${this._token}&${this._language}`;
+        const res = await this.getResource(url);
+        return this._transformFilmDetails(res);
     };
 
     getFilmList = async(type, page) => {
@@ -46,15 +52,41 @@ export default class MovieService {
     };
 
     _transformFilms = (film) => {
+        const dateFormat = new Date(film.release_date);
+        const monthName = dateFormat.toLocaleString('ru', {
+            month: 'long'
+        }).slice(0, 3) + '.';
+
         return {
             id: film.id,
             title: film.title,
             overview: film.overview,
-            releaseDate: film.release_date,
+            releaseDate: `${dateFormat.getDay()} ${monthName} ${dateFormat.getFullYear()}`,
             posterPath: this.getImage(film.poster_path, 154),
             backdropPath: this.getImage(film.backdrop_path, 154),
             voteAverage: film.vote_average,
             voteCount: film.vote_count
+        };
+    };
+
+    _transformFilmDetails = (film) => {
+        const dateFormat = new Date(film.release_date);
+        const monthName = dateFormat.toLocaleString('ru', {
+            month: 'long'
+        }).slice(0, 3) + '.';
+
+        return {
+            id: film.id,
+            title: film.title,
+            overview: film.overview,
+            releaseDate: `${dateFormat.getDay()} ${monthName} ${dateFormat.getFullYear()}`,
+            posterPath: this.getImage(film.poster_path, 154),
+            backdropPath: this.getImage(film.backdrop_path, 1280),
+            voteAverage: film.vote_average,
+            voteCount: film.vote_count,
+            genres: film.genres,
+            productionCountries: film.production_countries,
+            budget: film.budget
         };
     };
 }

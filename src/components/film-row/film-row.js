@@ -1,7 +1,7 @@
 import React from 'react';
-import {List, Icon} from 'antd';
+import {List, Icon, Button} from 'antd';
 
-const FilmRow = ({item}) => {
+const FilmRow = ({item, onRowSelected}) => {
     return (
         <List.Item
             key={item.title}
@@ -19,8 +19,14 @@ const FilmRow = ({item}) => {
         >
             <List.Item.Meta
                 title={item.title}
+                description={item.releaseDate}
             />
-            {item.overview}
+            <div>
+                <span className="overview">{item.overview}</span>
+                <Button type="link" onClick={() => { onRowSelected(item.id); }}>
+                    Подробнее...
+                </Button>
+            </div>
         </List.Item>
     );
 };
